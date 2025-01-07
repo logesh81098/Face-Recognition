@@ -11,6 +11,7 @@ module "lambda-function" {
   source = "./module/lambda-funtion"
   lambda-to-create-collection-id = module.iam-role.collection-id-role
   lambda-to-store-faceprints = module.iam-role.faceprints
+  source-bucket-arn = module.s3.bucket-arn
 }
 
 module "dynamodb-table" {

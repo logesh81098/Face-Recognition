@@ -46,6 +46,14 @@ resource "aws_lambda_function" "lambda-to-store-faceprints" {
   }
 }
 
+resource "aws_lambda_permission" "s3-trigger-lambda" {
+ statement_id = "InvokeLambdaFunction"
+ principal = "s3.amazonaws.com"
+ action = "lambda:InvokeFunction"
+ source_arn = var.source-bucket-arn
+  function_name = aws_lambda_function.lambda-to-store-faceprints.function_name
+}
+
 
 ############################################################################################################################
 #                                     Archive python code of Lambda function
@@ -55,3 +63,5 @@ data "archive_file" "faceprints" {
   source_dir = "module/lambda-funtion"
   output_path = "module/lambda-funtion/faceprints.zip"
 }
+
+
