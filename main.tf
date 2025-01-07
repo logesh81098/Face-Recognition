@@ -10,3 +10,7 @@ module "lambda-function" {
   source = "./module/lambda-funtion"
   lambda-to-create-collection-id = module.iam-role.collection-id-role
 }
+
+module "dynamodb-table" {
+  source = "./module/dynamodb-table"
+}
