@@ -1,5 +1,6 @@
 module "s3" {
   source = "./module/s3"
+  faceprints-lambda-arn = module.lambda-function.faceprints-lambda-arn
 }
 
 module "iam-role" {
