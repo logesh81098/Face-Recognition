@@ -160,3 +160,97 @@ resource "aws_iam_role_policy_attachment" "dynamodb-role-policy-attachment" {
   role = aws_iam_role.iam-role-putitems-in-dynamodb.id
   policy_arn = aws_iam_policy.iam-policy-putitems-in-dynamodb.arn
 }
+
+
+
+#############################################################################################################################
+#############################################################################################################################
+
+##############################################################################################################################
+#                                          Deploying IAM role 
+##############################################################################################################################
+
+###### Creating IAM Role for EKS Cluster 
+resource "aws_iam_role" "eks-cluster-role" {
+  name = "eks-cluster-role"
+  assume_role_policy = <<EOF
+  {
+  "Version": "2012-10-17",
+  "Statement": [
+  {
+    "Effect": "Allow",
+    "Principal": {
+      "Service": "eks.amazonaws.com"
+    },
+    "Action": "sts:AssumeRole"
+  }
+  ]
+  }
+EOF
+}
+
+
+##############################################################################################################################
+#                                          Role Policy Attachment
+##############################################################################################################################
+
+#Role and Policy attachment for EKS
+
+resource "aws_iam_role_policy_attachment" "eks-cluster-1" {
+  role = aws_iam_role.eks-cluster-role.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "eks-cluster-2" {
+  role = aws_iam_role.eks-cluster-role.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSServicePolicy"
+}
+
+
+#############################################################################################################################
+#############################################################################################################################
+
+##############################################################################################################################
+#                                          Deploying IAM role 
+##############################################################################################################################
+
+###### Creating IAM Role for EKS Node Group
+
+resource "aws_iam_role" "eks-node-group" {
+  name = "eks-node-group"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+  {
+    "Effect": "Allow",
+    "Principal": {
+      "Service": "ec2.amazonaws.com"
+    },
+    "Action": "sts:AssumeRole"
+  }
+  ]
+}  
+EOF
+}
+
+
+##############################################################################################################################
+#                                          Role Policy Attachment
+##############################################################################################################################
+
+#Role and Policy attachment for EKS Node Group
+resource "aws_iam_role_policy_attachment" "eks-worker-node-policy" {
+  role = aws_iam_role.eks-node-group.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"
+}
+
+resource "aws_iam_role_policy_attachment" "eks_cni_policy" {
+  role = aws_iam_role.eks-node-group.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_container_registry_policy" {
+  role = aws_iam_role.eks-node-group.id
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+}
