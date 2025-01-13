@@ -254,3 +254,8 @@ resource "aws_iam_role_policy_attachment" "ec2_container_registry_policy" {
   role = aws_iam_role.eks-node-group.id
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
 }
+
+resource "aws_iam_role_policy_attachment" "eks-to-get-items-dynamoDB" {
+ role =  aws_iam_role.eks-node-group.id
+ policy_arn = aws_iam_policy.iam-policy-putitems-in-dynamodb.arn
+}
