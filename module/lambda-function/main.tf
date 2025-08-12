@@ -42,3 +42,34 @@ resource "aws_lambda_invocation" "collectionid-invoke" {
     "collection_id" = "face-rekognition-collection"
   })
 }
+
+#############################################################################################################################################################################
+#                                                               Convert Python file to Zip file
+#############################################################################################################################################################################
+
+data "archive_file" "faceprints" {
+  type = "zip"
+  source_dir = "module/lambda-function"
+  output_path = "module/lambda-function/rekognition-faceprints.zip"
+}
+
+
+#############################################################################################################################################################################
+#                                                                      Lambda Function
+#############################################################################################################################################################################
+
+#Lambda function to Generate FacePrints using AWS Rekognition Service and store it in DynamoDb Table
+
+resource "aws_lambda_function" "faceprints" {
+  function_name = "Rekognition-Faceprints"
+  description = "Lambda function to Generate FacePrints using AWS Rekognition Service and store it in DynamoDb Table"
+  filename = "module/lambda-function/rekognition-faceprints.zip"
+  role = var.rekognition-faceprints-role-arn
+  handler = "rekognition-faceprints.lambda_handler"
+  timeout = 20
+  runtime = "python3.8"
+  tags = {
+    Name = "Rekognition-Faceprints"
+    Project = "Recognizing-faces-using-AWS-Rekognition-service"
+  }
+}
