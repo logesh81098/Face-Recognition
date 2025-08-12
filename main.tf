@@ -10,3 +10,7 @@ module "lambda-function" {
   source = "./module/lambda-function"
   rekognition-collectionid-role-arn = module.iam.collectionid-role-arn
 }
+
+module "dynamodb-table" {
+  source = "./module/dynamodb-table"
+}
