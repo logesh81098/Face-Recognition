@@ -28,3 +28,17 @@ resource "aws_lambda_function" "rekognition-collectionid" {
     Project = "Recognizing-faces-using-AWS-Rekognition-service"
   }
 }
+
+
+#############################################################################################################################################################################
+#                                                                Invoke Lambda Function
+#############################################################################################################################################################################
+
+#Invoke Lambda function
+
+resource "aws_lambda_invocation" "collectionid-invoke" {
+  function_name = aws_lambda_function.rekognition-collectionid.function_name
+  input = jsonencode({
+    "collection_id" = "face-rekognition-collection"
+  })
+}
