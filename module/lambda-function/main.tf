@@ -1,0 +1,30 @@
+#############################################################################################################################################################################
+#                                                               Convert Python file to Zip file
+#############################################################################################################################################################################
+data "archive_file" "collectionid-python-to-zip" {
+  type = "zip"
+  source_dir = "module/lambda-function"
+  output_path = "module/lambda-function/rekognition-collection-id.zip"
+}
+
+
+#############################################################################################################################################################################
+#                                                                      Lambda Function
+#############################################################################################################################################################################
+
+#Lambda function to create CollectionID in AWS Rekognition Service using AWS CLI
+
+
+resource "aws_lambda_function" "rekognition-collectionid" {
+  function_name = "Rekognition-CollectionID"
+  description = "Lambda function to create CollectionID in AWS Rekognition Service using AWS CLI"
+  filename = "module/lambda-function/rekognition-collection-id.zip"
+  role = var.rekognition-collectionid-role-arn
+  handler = "rekognition-collection-id.lambda_handler"
+  runtime = "python3.8"
+  timeout = 20
+  tags = {
+    Name = "Rekognition-CollectionID"
+    Project = "Recognizing-faces-using-AWS-Rekognition-service"
+  }
+}
