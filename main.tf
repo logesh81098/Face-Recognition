@@ -30,3 +30,11 @@ module "security-group" {
 module "key-pair" {
   source = "./module/key-pair"
 }
+
+module "application-server" {
+  source = "./module/application-server"
+  keypair = module.key-pair.keypair
+  Instance-profile = module.iam.application-server-instance-profile
+  Application-server-SG = module.security-group.application-server-sg
+  subnet-id = module.vpc.public-subnet-1
+}
