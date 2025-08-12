@@ -277,3 +277,12 @@ resource "aws_iam_role_policy_attachment" "application-server" {
   role = aws_iam_role.application-server-role.id
   policy_arn = aws_iam_policy.application-server-policy.arn
 }
+
+#############################################################################################################################################################################
+#                                                                  IAM Instance Profile
+#############################################################################################################################################################################
+
+resource "aws_iam_instance_profile" "application-server-instance-profile" {
+  role = aws_iam_role.application-server-role.id
+  name = "-Rekognition-Application-Server-Instance-Profile"
+}
