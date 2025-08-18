@@ -25,3 +25,7 @@ variable "HTTPS-Port" {
 variable "Jenkins-Port" {
   default = "8080"
 }
+
+variable "api-server" {
+  default = "443"
+}
