@@ -112,7 +112,7 @@ resource "aws_security_group" "eks-cluster-sg" {
 
 resource "aws_security_group" "eks-node-group-sg" {
   name = "Face-Rekognition-NodeGroup-SG"
-  description = "Security Group for Face Rekognition Cluster's Node Group"
+  description = "Security Group for Face Rekognition Cluster Node Group"
   vpc_id = var.vpc-id
 
   ingress {
@@ -135,8 +135,8 @@ resource "aws_security_group" "eks-node-group-sg" {
     from_port = var.SSH-port
     to_port = var.SSH-port
     protocol = "tcp"
-    cidr_blocks = [ var.SSH-port ]
-    description = "Ingress rule to allow SSH connection from anywhere"
+    cidr_blocks = [ var.anywhere-ip ]
+    description = "Ingress Rule for SSH Port"
   }
 
   ingress {
