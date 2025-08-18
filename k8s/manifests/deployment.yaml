@@ -12,6 +12,7 @@ spec:
       labels:
         app: face-rekognition
     spec:
+      ServiceAccount: face-rekognition-sa
       containers:
         - name: face-rekognition-app
           image: logeshshanmugavel/face-rekognition-app:latest
