@@ -1,20 +1,27 @@
+##################################################################################################################################
+#Deployment file
+
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
   name: face-rekognition-deployment
 spec:
   replicas: 1
-  selector:
-    matchLabels:
+  selector: 
+    matchLabels: 
       app: face-rekognition
-  template: 
+  template:
     metadata:
       labels:
         app: face-rekognition
     spec:
-      ServiceAccount: face-rekognition-sa
+      serviceAccountName: face-rekognition-sa
       containers:
-        - name: face-rekognition-app
-          image: logeshshanmugavel/face-rekognition-app:latest
-          ports:
-          - containerPort: 81
+      - name: face-rekognition-app
+        image: logeshshanmugavel/face-rekognition-app:latest
+        ports:
+        - containerPort: 81
+
+
+
+#[Note:Updated Deployment file with Service Account Name]
