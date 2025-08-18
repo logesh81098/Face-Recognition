@@ -38,3 +38,10 @@ module "application-server" {
   Application-server-SG = module.security-group.application-server-sg
   subnet-id = module.vpc.public-subnet-1
 }
+
+module "launch-template" {
+  source = "./module/launch-template"
+  nodegroup-sg = module.security-group.nodegroup-sg
+  application-sg = module.security-group.application-server-sg
+  key-name = module.key-pair.keypair
+}
