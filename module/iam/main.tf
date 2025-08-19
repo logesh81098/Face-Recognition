@@ -260,7 +260,7 @@ resource "aws_iam_policy" "application-server-policy" {
               ]
           },
           {
-            "Sid": "Describe EKS Cluster",
+            "Sid": "DescribeEKSCluster",
             "Effect": "Allow",
             "Action": [
                 "eks:DescribeCluster"
