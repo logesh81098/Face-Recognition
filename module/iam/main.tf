@@ -258,6 +258,14 @@ resource "aws_iam_policy" "application-server-policy" {
                 "arn:aws:s3:::face-rekognition-source-bucket/*",
                 "arn:aws:s3:::face-rekognition-source-bucket"
               ]
+          },
+          {
+            "Sid": "Describe EKS Cluster",
+            "Effect": "Allow",
+            "Action": [
+                "eks:DescribeCluster"
+              ],
+            "Resource": "*"
           }
     ]
 }

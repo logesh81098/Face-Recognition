@@ -90,7 +90,7 @@ resource "aws_iam_role" "oidc-role" {
 }
 
 
-#[Note: We might required to change the OIDC ARN each time for new creation on line 79] 
+#[Note: We might required to change the OIDC ARN each time for new creation on line 84] 
 
 #############################################################################################################################################################################
 #                                                                   IAM Policy
