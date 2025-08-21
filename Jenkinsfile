@@ -9,7 +9,7 @@ pipeline {
                     extensions: [],
                     submoduleCfg: [],
                     userRemoteConfigs: [[
-                        url: 'https://github.com/logesh81098/Face-recognition-using-AWS-Rekognition'
+                        url: 'https://github.com/logesh81098/Face-Recognition'
                     ]]
                 ])
             }
