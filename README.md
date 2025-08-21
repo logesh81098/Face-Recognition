@@ -53,6 +53,10 @@ Execute Terraform apply to build this infrasturcute
 
 ✨Finally,type yes for prompt
 
+**Output**
+
+https://github.com/user-attachments/assets/bf541a3a-0f5d-484b-b9f2-f31446000247
+
 
 Thank you so much for reading..😅
 
